@@ -18,7 +18,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
         this.setPreferredSize(new Dimension(w, h));
         this.setBackground(Color.BLACK);
-        myFrame = new JFrame("Pong Game - Lars Kühn");
+        myFrame = new JFrame("Pong Game - Lars K.");
         myFrame.setLocation(100, 100);
         myFrame.setResizable(false);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
