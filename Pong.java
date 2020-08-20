@@ -90,7 +90,9 @@ public class Pong extends JPanel implements Runnable, KeyListener{
     g.setColor(Color.BLUE);
     g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2());
     g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
-    g.drawString(Integer.toString(spielbaelle[0].getCounterRight()), 100, 100);
+    g.setColor(Color.BLACK);
+    g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20);
+    g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 700, 20);
     // Für String zeichnen g.forStringw
   }
   

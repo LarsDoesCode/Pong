@@ -5,7 +5,6 @@ public class Ball{
   private int xKoord, yKoord, dx, dy, size;
   private int originalX, originalY;
   private Rectangle rect;
-  private Random rndm;
   public int counterRight, counterLeft;
   
   
@@ -47,10 +46,9 @@ public class Ball{
   }
 
   public void resetSpawn(){
-    rndm = new Random();
-    xKoord = originalX;
+    xKoord = originalX; // Standart Spawn
     yKoord = originalY;
-    dx = -dx;
+    dx = -dx; // Verdreht Richtung --> Macht es fair
     dy = -dy;
     rect.setLocation(xKoord, yKoord);
     System.out.println("Es steht: Links: " + counterLeft + " Rechts: " + counterRight);
@@ -58,7 +56,7 @@ public class Ball{
 
   public void move(){
     //if(xKoord < 0 || xKoord > 780){
-    if(xKoord < 0){
+    if(xKoord < 0){ // Wenn trifft seite dann reset
       counterRight++;
       resetSpawn();
     }
