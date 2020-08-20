@@ -2,9 +2,14 @@ import java.awt.Rectangle;
 
 public class Ball {
     public int counterRight, counterLeft;
-    private int xKoord, yKoord, dx, dy, size;
-    private int originalX, originalY;
-    private Rectangle rectangle;
+    private int xKoord;
+    private int yKoord;
+    private int dx;
+    private int dy;
+    private final int size;
+    private final int originalX;
+    private final int originalY;
+    private final Rectangle rectangle;
 
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {

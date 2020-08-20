@@ -1,8 +1,11 @@
 import java.awt.Rectangle;
 
 public class Brick {
-    private int xKoord, yKoord, size1, size2;
-    private Rectangle rectangle;
+    private final int xKoord;
+    private int yKoord;
+    private final int size1;
+    private final int size2;
+    private final Rectangle rectangle;
     private char direction;
 
     public Brick(int pXKoord, int pYKoord, int pSize1, int pSize2) {
