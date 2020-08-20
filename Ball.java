@@ -72,7 +72,7 @@ public class Ball {
             resetSpawn();
         }
 
-        if (yKoord < 0 || yKoord > 580) { // Change directions when top or bottom is hitted
+        if (yKoord < 0 || yKoord > 580) { // Change directions when top or bottom is hit
             dy = -dy;
         }
         xKoord += dx;

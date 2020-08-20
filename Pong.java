@@ -11,7 +11,6 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     Ball[] matchBall;
     Brick brickLeft, brickRight;
 
-
     public Pong(int w, int h) {
 
         initGame();
@@ -66,16 +65,17 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
+                System.out.println("Error");
             }
         }
     }
 
     public void moveObjects() {
-        brickLeft.move('x');
-        brickRight.move('x');
+        brickLeft.move();
+        brickRight.move();
 
-        for (int i = 0; i < matchBall.length; i++) {
-            matchBall[i].move();
+        for (Ball ball : matchBall) { // Enhanced for (For every Ball in Matchball)
+            ball.move();
         }
     }
 
@@ -84,8 +84,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         super.paintComponent(g);
 
         g.setColor(Color.YELLOW);
-        for (int i = 0; i < matchBall.length; i++) {
-            g.fillOval(matchBall[i].getXKoord(), matchBall[i].getYKoord(), matchBall[i].getSize(), matchBall[i].getSize()); // Draws matchBalls
+        for (Ball ball : matchBall) {
+            g.fillOval(ball.getXKoord(), ball.getYKoord(), ball.getSize(), ball.getSize()); // Draws matchBalls
         }
 
         g.setColor(Color.YELLOW);
@@ -93,10 +93,10 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
 
         g.setColor(Color.YELLOW);
-        g.drawString("Left: " + Integer.toString(matchBall[0].getCounterLeft()), 50, 20); // Displays current score
-        g.drawString("Right: " + Integer.toString(matchBall[0].getCounterRight()), 720, 20);
+        g.drawString("Left: " + matchBall[0].getCounterLeft(), 50, 20); // Displays current score
+        g.drawString("Right: " + matchBall[0].getCounterRight(), 720, 20);
 
-        for(int i = 0; i < 600; i++){
+        for (int i = 0; i < 600; i++) {
             g.drawString("|", 400, i);
         }
     }
@@ -119,13 +119,13 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             brickLeft.setDirection('s');
         }
 
-        if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
-
-        }
-
-        if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
-
-        }
+//        if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
+//
+//        }
+//
+//        if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
+//
+//        }
     }
 
     @Override
@@ -146,13 +146,13 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             brickLeft.setDirection('x');
         }
 
-        if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
-
-        }
-
-        if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
-
-        }
+//        if ((e.getKeyCode() == KeyEvent.VK_LEFT)) {
+//
+//        }
+//
+//        if ((e.getKeyCode() == KeyEvent.VK_RIGHT)) {
+//
+//        }
     }
 
     @Override

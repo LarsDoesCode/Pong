@@ -38,7 +38,7 @@ public class Brick {
         direction = pDirection;
     }
 
-    public void move(char pKey) {
+    public void move() {
         rectangle.setLocation(xKoord, yKoord);
 
         if (direction == 'x') {
