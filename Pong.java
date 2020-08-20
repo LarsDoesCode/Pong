@@ -17,7 +17,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         initGame();
 
         this.setPreferredSize(new Dimension(w, h));
-        this.setBackground(Color.WHITE);
+        this.setBackground(Color.BLACK);
         myFrame = new JFrame("Pong Game - Lars Kühn");
         myFrame.setLocation(100, 100);
         myFrame.setResizable(false);
@@ -33,12 +33,12 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
     private void initGame() {
 
-        brickLeft = new Brick(100, 200, 40, 250);
-        brickRight = new Brick(700, 200, 40, 250);
+        brickLeft = new Brick(100, 200, 10, 50);
+        brickRight = new Brick(700, 200, 10, 50);
         rndm = new Random();
         spielbaelle = new Ball[1];
         for (int i = 0; i < spielbaelle.length; i++) {
-            spielbaelle[i] = new Ball(rndm.nextInt(200 + 1) + 350 + 1, rndm.nextInt(150 + 1) + 250 + 1, 5, 5, 20);
+            spielbaelle[i] = new Ball(rndm.nextInt(200 + 1) + 350 + 1, rndm.nextInt(150 + 1) + 250 + 1, 3, 3, 20);
         }
     }
 
@@ -84,17 +84,19 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         //Hier werden die Objekte gezeichnet
-        g.setColor(Color.RED);
+        g.setColor(Color.YELLOW);
         for (int i = 0; i < spielbaelle.length; i++) {
             g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize()); // Draws balls
         }
-        g.setColor(Color.BLUE);
+        g.setColor(Color.YELLOW);
         g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
-        g.setColor(Color.BLACK);
+        g.setColor(Color.YELLOW);
         g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20); // Displays current score
         g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 700, 20);
-        // Für String zeichnen g.forStringw
+        for(int i = 0; i < 600; i++){
+            g.drawString("|", 400, i);
+        }
     }
 
 
