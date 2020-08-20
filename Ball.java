@@ -50,7 +50,6 @@ public class Ball {
         dx = -dx; // Turns the direction of the ball around to make it fair
         dy = -dy;
         rect.setLocation(xKoord, yKoord);
-        System.out.println("Es steht: Links: " + counterLeft + " Rechts: " + counterRight);
     }
 
     public int getCounterLeft() {
