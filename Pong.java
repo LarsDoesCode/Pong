@@ -13,7 +13,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
 
     public Pong(int w, int h) {
-        ;
+
         initGame();
 
         this.setPreferredSize(new Dimension(w, h));
@@ -32,7 +32,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     private void initGame() {
-        //Hier werden alle Objekte des Spiels initialisiert
+
         brickLeft = new Brick(100, 200, 40, 250);
         brickRight = new Brick(700, 200, 40, 250);
         rndm = new Random();
@@ -48,12 +48,12 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             moveObjects();
             repaint();
 
-            for (int i = 0; i < spielbaelle.length; i++) {  // Bälle prallen an Brick ab
+            for (int i = 0; i < spielbaelle.length; i++) {  // Balls bounce of Brick
                 if (spielbaelle[i].getRect().intersects(brickLeft.getRect()) || spielbaelle[i].getRect().intersects(brickRight.getRect())) {
                     spielbaelle[i].aendereXRichtung();
                 }
 
-                for (int k = i + 1; k < spielbaelle.length; k++) { // Bälle prallen an sich selber ab
+                for (int k = i + 1; k < spielbaelle.length; k++) { // Balls bounce of each other
                     if (spielbaelle[i].getRect().intersects(spielbaelle[k].getRect())) {
                         spielbaelle[i].aendereXRichtung();
                         spielbaelle[k].aendereXRichtung();
@@ -67,7 +67,6 @@ public class Pong extends JPanel implements Runnable, KeyListener {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
             }
-            ;
         }
     }
 
@@ -87,20 +86,20 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         //Hier werden die Objekte gezeichnet
         g.setColor(Color.RED);
         for (int i = 0; i < spielbaelle.length; i++) {
-            g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize());
+            g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize()); // Draws balls
         }
         g.setColor(Color.BLUE);
-        g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2());
+        g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
         g.setColor(Color.BLACK);
-        g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20);
+        g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20); // Displays current score
         g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 700, 20);
         // Für String zeichnen g.forStringw
     }
 
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) { // Move brick
         if ((e.getKeyCode() == KeyEvent.VK_UP)) {
             brickRight.setDirection('w');
         }
@@ -127,7 +126,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void keyReleased(KeyEvent e) { // When key is released stop Brick
         if ((e.getKeyCode() == KeyEvent.VK_UP)) {
             brickRight.setDirection('x');
         }
@@ -155,12 +154,12 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        if (e.getKeyChar() == 27) {
+        if (e.getKeyChar() == 27) { // If escape is pressed exit
             System.exit(0);
         } // end of if
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) { // Main
         new Pong(800, 600);
     }
 }

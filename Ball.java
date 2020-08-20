@@ -1,11 +1,10 @@
 import java.awt.Rectangle;
-import java.util.Random;
 
 public class Ball {
+    public int counterRight, counterLeft;
     private int xKoord, yKoord, dx, dy, size;
     private int originalX, originalY;
     private Rectangle rect;
-    public int counterRight, counterLeft;
 
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {
@@ -46,17 +45,25 @@ public class Ball {
     }
 
     public void resetSpawn() {
-        xKoord = originalX; // Standart Spawn
+        xKoord = originalX;
         yKoord = originalY;
-        dx = -dx; // Verdreht Richtung --> Macht es fair
+        dx = -dx; // Turns the direction of the ball around to make it fair
         dy = -dy;
         rect.setLocation(xKoord, yKoord);
         System.out.println("Es steht: Links: " + counterLeft + " Rechts: " + counterRight);
     }
 
+    public int getCounterLeft() {
+        return counterLeft;
+    }
+
+    public int getCounterRight() {
+        return counterRight;
+    }
+
     public void move() {
-        //if(xKoord < 0 || xKoord > 780){
-        if (xKoord < 0) { // Wenn trifft seite dann reset
+
+        if (xKoord < 0) { // When ball gets 'out of bounce' reset
             counterRight++;
             resetSpawn();
         }
@@ -66,19 +73,11 @@ public class Ball {
             resetSpawn();
         }
 
-        if (yKoord < 0 || yKoord > 580) {
+        if (yKoord < 0 || yKoord > 580) { // Change directions when top or bottom is hitted
             dy = -dy;
         }
         xKoord += dx;
         yKoord += dy;
         rect.setLocation(xKoord, yKoord);
-    }
-
-    public int getCounterLeft() {
-        return counterLeft;
-    }
-
-    public int getCounterRight() {
-        return counterRight;
     }
 }

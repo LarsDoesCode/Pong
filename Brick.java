@@ -44,18 +44,18 @@ public class Brick {
         if (direction == 'x') {
             rect.setLocation(xKoord, yKoord);
         }
-        if (yKoord > 600 - size2) {
-            yKoord -= 6;
+        if (yKoord > 600 - size2) { // When Brick hits the top or bottom stop it
+            yKoord -= 4;
         }
         if (yKoord < 0) {
-            yKoord += 6;
+            yKoord += 4;
         }
         if (direction == 'w') {
-            yKoord -= 6;
+            yKoord -= 4;
         }
 
         if (direction == 's') {
-            yKoord += 6;
+            yKoord += 4;
         }
 
 
