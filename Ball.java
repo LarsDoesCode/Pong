@@ -4,7 +4,7 @@ public class Ball {
     public int counterRight, counterLeft;
     private int xKoord, yKoord, dx, dy, size;
     private int originalX, originalY;
-    private Rectangle rect;
+    private Rectangle rectangle;
 
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {
@@ -17,7 +17,7 @@ public class Ball {
         size = pSize;
         counterRight = 0;
         counterLeft = 0;
-        rect = new Rectangle(xKoord, yKoord, size, size);
+        rectangle = new Rectangle(xKoord, yKoord, size, size);
     }
 
     public int getXKoord() {
@@ -32,15 +32,15 @@ public class Ball {
         return size;
     }
 
-    public Rectangle getRect() {
-        return rect;
+    public Rectangle getRectangle() {
+        return rectangle;
     }
 
-    public void aendereXRichtung() {
+    public void changeXDirection() {
         dx = -dx;
     }
 
-    public void aendereYRichtung() {
+    public void changeYDirection() {
         dy = -dy;
     }
 
@@ -49,7 +49,7 @@ public class Ball {
         yKoord = originalY;
         dx = -dx; // Turns the direction of the ball around to make it fair
         dy = -dy;
-        rect.setLocation(xKoord, yKoord);
+        rectangle.setLocation(xKoord, yKoord);
     }
 
     public int getCounterLeft() {
@@ -77,6 +77,6 @@ public class Ball {
         }
         xKoord += dx;
         yKoord += dy;
-        rect.setLocation(xKoord, yKoord);
+        rectangle.setLocation(xKoord, yKoord);
     }
 }

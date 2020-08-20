@@ -7,8 +7,8 @@ import java.util.Random;
 public class Pong extends JPanel implements Runnable, KeyListener {
 
     JFrame myFrame;
-    Random rndm;
-    Ball[] spielbaelle;
+    Random random;
+    Ball[] matchBall;
     Brick brickLeft, brickRight;
 
 
@@ -35,10 +35,10 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
         brickLeft = new Brick(100, 200, 10, 50);
         brickRight = new Brick(700, 200, 10, 50);
-        rndm = new Random();
-        spielbaelle = new Ball[1];
-        for (int i = 0; i < spielbaelle.length; i++) {
-            spielbaelle[i] = new Ball(rndm.nextInt(200 + 1) + 350 + 1, rndm.nextInt(150 + 1) + 250 + 1, 3, 3, 20);
+        random = new Random();
+        matchBall = new Ball[1];
+        for (int i = 0; i < matchBall.length; i++) {
+            matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 3, 3, 20);
         }
     }
 
@@ -48,17 +48,17 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             moveObjects();
             repaint();
 
-            for (int i = 0; i < spielbaelle.length; i++) {  // Balls bounce of Brick
-                if (spielbaelle[i].getRect().intersects(brickLeft.getRect()) || spielbaelle[i].getRect().intersects(brickRight.getRect())) {
-                    spielbaelle[i].aendereXRichtung();
+            for (int i = 0; i < matchBall.length; i++) {  // Balls bounce of Brick
+                if (matchBall[i].getRectangle().intersects(brickLeft.getRectangle()) || matchBall[i].getRectangle().intersects(brickRight.getRectangle())) {
+                    matchBall[i].changeXDirection();
                 }
 
-                for (int k = i + 1; k < spielbaelle.length; k++) { // Balls bounce of each other
-                    if (spielbaelle[i].getRect().intersects(spielbaelle[k].getRect())) {
-                        spielbaelle[i].aendereXRichtung();
-                        spielbaelle[k].aendereXRichtung();
-                        spielbaelle[i].aendereYRichtung();
-                        spielbaelle[k].aendereYRichtung();
+                for (int k = i + 1; k < matchBall.length; k++) { // Balls bounce of each other
+                    if (matchBall[i].getRectangle().intersects(matchBall[k].getRectangle())) {
+                        matchBall[i].changeXDirection();
+                        matchBall[k].changeXDirection();
+                        matchBall[i].changeYDirection();
+                        matchBall[k].changeYDirection();
                     }
                 }
             }
@@ -74,8 +74,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         brickLeft.move('x');
         brickRight.move('x');
 
-        for (int i = 0; i < spielbaelle.length; i++) {
-            spielbaelle[i].move();
+        for (int i = 0; i < matchBall.length; i++) {
+            matchBall[i].move();
         }
     }
 
@@ -84,8 +84,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         super.paintComponent(g);
 
         g.setColor(Color.YELLOW);
-        for (int i = 0; i < spielbaelle.length; i++) {
-            g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize()); // Draws balls
+        for (int i = 0; i < matchBall.length; i++) {
+            g.fillOval(matchBall[i].getXKoord(), matchBall[i].getYKoord(), matchBall[i].getSize(), matchBall[i].getSize()); // Draws matchBalls
         }
 
         g.setColor(Color.YELLOW);
@@ -93,14 +93,13 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
 
         g.setColor(Color.YELLOW);
-        g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20); // Displays current score
-        g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 720, 20);
+        g.drawString("Left: " + Integer.toString(matchBall[0].getCounterLeft()), 50, 20); // Displays current score
+        g.drawString("Right: " + Integer.toString(matchBall[0].getCounterRight()), 720, 20);
 
         for(int i = 0; i < 600; i++){
             g.drawString("|", 400, i);
         }
     }
-
 
     @Override
     public void keyPressed(KeyEvent e) { // Move brick
