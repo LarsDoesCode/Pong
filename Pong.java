@@ -84,11 +84,11 @@ public class Pong extends JPanel implements Runnable, KeyListener{
   public void paintComponent(Graphics g){
     super.paintComponent(g);
     //Hier werden die Objekte gezeichnet
-    g.setColor(Color.BLUE);
+    g.setColor(Color.RED);
     for(int i = 0; i < spielbaelle.length; i++){
       g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize());
     }
-    g.setColor(Color.RED);
+    g.setColor(Color.BLUE);
     g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2());
     g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
   }
