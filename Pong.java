@@ -71,7 +71,6 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     public void moveObjects() {
-        //Hier werden die Objekte bewegt
         brickLeft.move('x');
         brickRight.move('x');
 
@@ -83,17 +82,20 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        //Hier werden die Objekte gezeichnet
+
         g.setColor(Color.YELLOW);
         for (int i = 0; i < spielbaelle.length; i++) {
             g.fillOval(spielbaelle[i].getXKoord(), spielbaelle[i].getYKoord(), spielbaelle[i].getSize(), spielbaelle[i].getSize()); // Draws balls
         }
+
         g.setColor(Color.YELLOW);
         g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
+
         g.setColor(Color.YELLOW);
         g.drawString("Links: " + Integer.toString(spielbaelle[0].getCounterLeft()), 50, 20); // Displays current score
-        g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 700, 20);
+        g.drawString("Rechts: " + Integer.toString(spielbaelle[0].getCounterRight()), 720, 20);
+
         for(int i = 0; i < 600; i++){
             g.drawString("|", 400, i);
         }
