@@ -10,6 +10,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     Random random;
     Ball[] matchBall;
     Brick brickLeft, brickRight;
+    Bonus item;
 
     public Pong(int w, int h) {
 
@@ -32,10 +33,11 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
     private void initGame() {
 
+        random = new Random();
         brickLeft = new Brick(100, 200, 10, 50);
         brickRight = new Brick(700, 200, 10, 50);
-        random = new Random();
         matchBall = new Ball[1];
+        item = new Bonus(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 20);
         for (int i = 0; i < matchBall.length; i++) {
             matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 3, 3, 20);
         }
@@ -50,6 +52,12 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             for (int i = 0; i < matchBall.length; i++) {  // Balls bounce of Brick
                 if (matchBall[i].getRectangle().intersects(brickLeft.getRectangle()) || matchBall[i].getRectangle().intersects(brickRight.getRectangle())) {
                     matchBall[i].changeXDirection();
+                }
+
+                for (int l = 0; l < matchBall.length; l++) {
+                    if (matchBall[l].getRectangle().intersects(item.getRectangle())) {
+                        System.exit(0);
+                    }
                 }
 
                 for (int k = i + 1; k < matchBall.length; k++) { // Balls bounce of each other
@@ -99,6 +107,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         for (int i = 0; i < 600; i++) {
             g.drawString("|", 400, i);
         }
+        g.setColor(Color.RED);
+        g.drawRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
     }
 
     @Override
