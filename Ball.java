@@ -49,10 +49,6 @@ public class Ball {
         dx -= pSpeed;
     }
 
-    public void slowDown(int pSpeed) {
-        dx -= pSpeed;
-    }
-
     public void resetSpawn() {
         Random random = new Random();
         xKoord = random.nextInt(200 + 1) + 350 + 1; // random spawn in specific field

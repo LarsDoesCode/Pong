@@ -5,8 +5,9 @@ public class Brick {
     private int yKoord;
     private final int size1;
     private final int size2;
-    private final Rectangle rectangle;
+    private Rectangle rectangle;
     private char direction;
+    private int speed;
 
     public Brick(int pXKoord, int pYKoord, int pSize1, int pSize2) {
         xKoord = pXKoord;
@@ -15,6 +16,7 @@ public class Brick {
         size2 = pSize2;
         direction = 'x';
         rectangle = new Rectangle(xKoord, yKoord, size1, size2);
+        speed = 6;
     }
 
     public int getXKoord() {
@@ -41,7 +43,15 @@ public class Brick {
         direction = pDirection;
     }
 
-    public void move(int speed) {
+    public void slowDown() {
+        speed -= 2;
+    }
+
+    public void speedUp() {
+        speed += 2;
+    }
+
+    public void move() {
         rectangle.setLocation(xKoord, yKoord); // rearranges hitbox
 
         if (direction == 'x') {

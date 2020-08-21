@@ -64,18 +64,28 @@ public class Pong extends JPanel implements Runnable, KeyListener {
                         item.newSpawn(); // spawns new item
                         item.reArrange(); // defines hit box to new spawn location
                         item.setVisible(false); // hides the new item
-                        int randomInteger = random.nextInt(5); // random integer defines what happens if object get hit
+                        int randomInteger = random.nextInt(7); // random integer defines what happens if object get hit
 
                         if (randomInteger == 0) {
                             ball.changeXDirection();
+                            System.out.println("The Ball changed directions");
                         } else if (randomInteger == 1) {
-                            ball.changeYDirection();
-                        } else if (randomInteger == 2) {
                             ball.speedUp(2);
+                            System.out.println("The Ball moves faster");
+                        } else if (randomInteger == 2) {
+                            brickLeft.speedUp();
+                            System.out.println("The left Brick now moves faster");
                         } else if (randomInteger == 3) {
-                            ball.slowDown(2);
+                            brickLeft.slowDown();
+                            System.out.println("The left Brick now moves slower");
+                        } else if (randomInteger == 4) {
+                            brickRight.speedUp();
+                            System.out.println("The right Brick now moves faster");
+                        } else if (randomInteger == 5) {
+                            brickRight.slowDown();
+                            System.out.println("The right Brick now moves slower");
                         } else {
-                            ball.resetSpawn();
+                            System.out.println("Nothing happened");
                         }
                     }
                 }
@@ -105,8 +115,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     public void moveObjects() {
-        brickLeft.move(6);
-        brickRight.move(6);
+        brickLeft.move();
+        brickRight.move();
 
         for (Ball ball : matchBall) { // enhanced for (For every Ball in Ball[] array)
             ball.move();
@@ -121,22 +131,18 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             g.setColor(Color.GREEN);
             g.fillRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
         }
-        g.setColor(Color.YELLOW);
+        g.setColor(Color.RED);
         for (Ball ball : matchBall) { // draw every ball
             g.fillOval(ball.getXKoord(), ball.getYKoord(), ball.getSize(), ball.getSize()); // Draws matchBalls
         }
 
-        g.setColor(Color.YELLOW); // draw the 2 bricks
+        g.setColor(Color.RED); // draw the 2 bricks
         g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
         g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
 
-        g.setColor(Color.YELLOW); // draw / display counter
+        g.setColor(Color.RED); // draw / display counter
         g.drawString("Left: " + matchBall[0].getCounterLeft(), 50, 20); // Displays current score
         g.drawString("Right: " + matchBall[0].getCounterRight(), 720, 20);
-
-        for (int i = 0; i < 600; i++) { // draw middle line
-            g.drawString("|", 400, i);
-        }
     }
 
     @Override
