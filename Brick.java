@@ -41,24 +41,24 @@ public class Brick {
         direction = pDirection;
     }
 
-    public void move() {
+    public void move(int speed) {
         rectangle.setLocation(xKoord, yKoord);
 
         if (direction == 'x') {
             rectangle.setLocation(xKoord, yKoord);
         }
         if (yKoord > 600 - size2) { // When Brick hits the top or bottom stop it
-            yKoord -= 4;
+            yKoord -= speed;
         }
         if (yKoord < 0) {
-            yKoord += 4;
+            yKoord += speed;
         }
         if (direction == 'w') {
-            yKoord -= 4;
+            yKoord -= speed;
         }
 
         if (direction == 's') {
-            yKoord += 4;
+            yKoord += speed;
         }
 
 

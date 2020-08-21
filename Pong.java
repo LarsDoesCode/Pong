@@ -71,8 +71,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     public void moveObjects() {
-        brickLeft.move();
-        brickRight.move();
+        brickLeft.move(6);
+        brickRight.move(6);
 
         for (Ball ball : matchBall) { // Enhanced for (For every Ball in Matchball)
             ball.move();
