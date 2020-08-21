@@ -49,15 +49,19 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             moveObjects();
             repaint();
 
+            if(matchBall[0].getCounterLeft() >= 5 || matchBall[0].getCounterRight() >= 5){
+                item.setVisible(true);
+
+                for (Ball ball : matchBall) {
+                    if (ball.getRectangle().intersects(item.getRectangle())) {
+                        System.exit(10);
+                    }
+                }
+            }
+
             for (int i = 0; i < matchBall.length; i++) {  // Balls bounce of Brick
                 if (matchBall[i].getRectangle().intersects(brickLeft.getRectangle()) || matchBall[i].getRectangle().intersects(brickRight.getRectangle())) {
                     matchBall[i].changeXDirection();
-                }
-
-                for (int l = 0; l < matchBall.length; l++) {
-                    if (matchBall[l].getRectangle().intersects(item.getRectangle())) {
-                        System.exit(0);
-                    }
                 }
 
                 for (int k = i + 1; k < matchBall.length; k++) { // Balls bounce of each other
@@ -82,7 +86,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         brickLeft.move(6);
         brickRight.move(6);
 
-        for (Ball ball : matchBall) { // Enhanced for (For every Ball in Matchball)
+        for (Ball ball : matchBall) { // Enhanced for (For every Ball in Ball[] array)
             ball.move();
         }
     }
@@ -91,6 +95,11 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
+        if(item.isVisible()){
+            g.setColor(Color.GREEN);
+            System.out.println("yes");
+            g.fillRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
+        }
         g.setColor(Color.YELLOW);
         for (Ball ball : matchBall) {
             g.fillOval(ball.getXKoord(), ball.getYKoord(), ball.getSize(), ball.getSize()); // Draws matchBalls
@@ -107,8 +116,6 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         for (int i = 0; i < 600; i++) {
             g.drawString("|", 400, i);
         }
-        g.setColor(Color.RED);
-        g.drawRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
     }
 
     @Override

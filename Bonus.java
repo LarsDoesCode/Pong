@@ -35,4 +35,8 @@ public class Bonus {
     public boolean isVisible() {
         return visible;
     }
+
+    public void setVisible(boolean pVisible) {
+        visible = pVisible;
+    }
 }
