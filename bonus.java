@@ -2,8 +2,8 @@ import java.awt.Rectangle;
 
 public class Bonus {
     public int counterRight, counterLeft;
-    private int xKoord;
-    private int yKoord;
+    private final int xKoord;
+    private final int yKoord;
     private final int size;
     private final Rectangle rectangle;
 
