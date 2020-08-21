@@ -37,12 +37,12 @@ public class Brick {
         return rectangle;
     }
 
-    public void setDirection(char pDirection) {
+    public void setDirection(char pDirection) { // sets direction
         direction = pDirection;
     }
 
     public void move(int speed) {
-        rectangle.setLocation(xKoord, yKoord);
+        rectangle.setLocation(xKoord, yKoord); // rearranges hitbox
 
         if (direction == 'x') {
             rectangle.setLocation(xKoord, yKoord);

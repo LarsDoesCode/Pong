@@ -15,15 +15,17 @@ public class Bonus {
         visible = pVisible;
         rectangle = new Rectangle(xKoord, yKoord, size, size);
     }
-    public void newSpawn(){
+
+    public void newSpawn() {
         Random random = new Random();
         xKoord = random.nextInt(200 + 1) + 350 + 1;
         yKoord = random.nextInt(150 + 1) + 250 + 1;
     }
 
-    public void reArrange(){
+    public void reArrange() {
         rectangle.setLocation(xKoord, yKoord);
     }
+
     public int getXKoord() {
         return xKoord;
     }

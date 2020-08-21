@@ -1,5 +1,6 @@
 import java.awt.Rectangle;
 import java.util.Random;
+
 public class Ball {
     public int counterRight, counterLeft;
     private int xKoord;
@@ -7,16 +8,11 @@ public class Ball {
     private int dx;
     private int dy;
     private final int size;
-    private final int originalX;
-    private final int originalY;
     private final Rectangle rectangle;
-    private Random random;
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {
         xKoord = pX;
-        originalX = pX;
         yKoord = pY;
-        originalY = pY;
         dx = pDx;
         dy = pDy;
         size = pSize;
@@ -58,8 +54,8 @@ public class Ball {
     }
 
     public void resetSpawn() {
-        random = new Random();
-        xKoord = random.nextInt(200 + 1) + 350 + 1;
+        Random random = new Random();
+        xKoord = random.nextInt(200 + 1) + 350 + 1; // random spawn in specific field
         yKoord = random.nextInt(150 + 1) + 250 + 1;
         dx = -dx; // Turns the direction of the ball around to make it fair
         dy = -dy;
@@ -76,7 +72,7 @@ public class Ball {
 
     public void move() {
 
-        if (xKoord < 0) { // When ball gets 'out of bounce' reset
+        if (xKoord < 0) { // when ball gets 'out of bounce' reset
             counterRight++;
             resetSpawn();
         }
@@ -86,7 +82,7 @@ public class Ball {
             resetSpawn();
         }
 
-        if (yKoord < 0 || yKoord > 580) { // Change directions when top or bottom is hit
+        if (yKoord < 0 || yKoord > 580) { // change directions when top or bottom is hit
             dy = -dy;
         }
         xKoord += dx;
