@@ -37,7 +37,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         brickLeft = new Brick(100, 200, 10, 50);
         brickRight = new Brick(700, 200, 10, 50);
         matchBall = new Ball[1];
-        item = new Bonus(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 20);
+        item = new Bonus(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 20, false);
         for (int i = 0; i < matchBall.length; i++) {
             matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 3, 3, 20);
         }
