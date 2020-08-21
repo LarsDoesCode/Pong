@@ -49,12 +49,26 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             moveObjects();
             repaint();
 
-            if(matchBall[0].getCounterLeft() >= 5 || matchBall[0].getCounterRight() >= 5){
+            if (matchBall[0].getCounterLeft() >= 5 || matchBall[0].getCounterRight() >= 5) {
                 item.setVisible(true);
 
                 for (Ball ball : matchBall) {
                     if (ball.getRectangle().intersects(item.getRectangle())) {
-                        System.exit(10);
+                        item.newSpawn();
+                        item.reArrange();
+                        item.setVisible(false);
+                        int randomInteger = random.nextInt(5);
+                        if (randomInteger == 0) {
+                            ball.changeXDirection();
+                        } else if (randomInteger == 1) {
+                            ball.changeYDirection();
+                        } else if (randomInteger == 2){
+                            ball.speedUp(2);
+                        } else if (randomInteger == 3){
+                            ball.slowDown(2);
+                        } else {
+                            ball.resetSpawn();
+                        }
                     }
                 }
             }
@@ -77,7 +91,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
-                System.out.println("Error");
+                System.out.println(e);
             }
         }
     }
@@ -95,9 +109,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        if(item.isVisible()){
+        if (item.isVisible()) {
             g.setColor(Color.GREEN);
-            System.out.println("yes");
             g.fillRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
         }
         g.setColor(Color.YELLOW);

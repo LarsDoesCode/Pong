@@ -1,5 +1,5 @@
 import java.awt.Rectangle;
-
+import java.util.Random;
 public class Ball {
     public int counterRight, counterLeft;
     private int xKoord;
@@ -10,7 +10,7 @@ public class Ball {
     private final int originalX;
     private final int originalY;
     private final Rectangle rectangle;
-
+    private Random random;
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {
         xKoord = pX;
@@ -49,9 +49,18 @@ public class Ball {
         dy = -dy;
     }
 
+    public void speedUp(int pSpeed) {
+        dx -= pSpeed;
+    }
+
+    public void slowDown(int pSpeed) {
+        dx -= pSpeed;
+    }
+
     public void resetSpawn() {
-        xKoord = originalX;
-        yKoord = originalY;
+        random = new Random();
+        xKoord = random.nextInt(200 + 1) + 350 + 1;
+        yKoord = random.nextInt(150 + 1) + 250 + 1;
         dx = -dx; // Turns the direction of the ball around to make it fair
         dy = -dy;
         rectangle.setLocation(xKoord, yKoord);
