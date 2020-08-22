@@ -49,7 +49,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
             matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 3, 3, 20); // randomize spawn-location of the balls
         }
     }
-
+    // hallo
     @Override
     public void run() {
         while (myFrame.isVisible()) {
