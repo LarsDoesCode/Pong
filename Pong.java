@@ -20,9 +20,9 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
     public Pong(int w, int h) {
 
-        initGame(); // Start game
+        initGame(); // start game
 
-        this.setPreferredSize(new Dimension(w, h));
+        this.setPreferredSize(new Dimension(w, h)); // window gets created with given height and width
         this.setBackground(Color.BLACK);
         background = Toolkit.getDefaultToolkit().getImage("Pictures/Background.png");
         myFrame = new JFrame("Pong Game - Lars K.");
@@ -53,7 +53,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     }
 
     @Override
-    public void run() {
+    public void run() { // runs the game as long as the window is open
         while (myFrame.isVisible()) {
             moveObjects(); // constantly move the objects
             repaint(); // constantly repaint the objects
@@ -120,7 +120,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         }
     }
 
-    public void moveObjects() {
+    public void moveObjects() { // moves the objects
         brickLeft.move();
         brickRight.move();
 
@@ -132,7 +132,8 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(background, 0, 0, null);
+
+        g.drawImage(background, 0, 0, null); // draws the image
 
         if (item.isVisible()) { // makes item visible to the player
             g.setColor(Color.GREEN);
