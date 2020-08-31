@@ -1,7 +1,7 @@
 /*
     GitHub: https://github.com/LarsDoesCode/
     GitHub Repo: https://github.com/LarsDoesCode/Pong
-    Last updated 21.08.2020
+    Last updated 31.08.2020
  */
 
 import javax.swing.*;   // import modules
@@ -17,6 +17,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
     Brick brickLeft, brickRight;
     Bonus item;
     Image background;
+    int counterLeft, counterRight;
 
     public Pong(int w, int h) {
 
@@ -48,7 +49,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
         matchBall = new Ball[1]; // how many balls are in the game
         for (int i = 0; i < matchBall.length; i++) {
-            matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 3, 3, 20); // randomize spawn-location of the balls
+            matchBall[i] = new Ball(random.nextInt(200 + 1) + 350 + 1, random.nextInt(150 + 1) + 250 + 1, 5, 5, 20); // randomize spawn-location of the balls
         }
     }
 
@@ -57,18 +58,18 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         while (myFrame.isVisible()) {
             moveObjects(); // constantly move the objects
             repaint(); // constantly repaint the objects
+            checkScore();
 
-            if (matchBall[0].getCounterLeft() >= 10 || matchBall[0].getCounterRight() >= 10) {
+            if (counterLeft >= 10 || counterRight >= 10) {
                 endScreen();
                 System.exit(0);
             }
-            if (matchBall[0].getCounterLeft() >= 5 || matchBall[0].getCounterRight() >= 5) { // when one of the players have a score of 5 or higher spawn random items
+            if (counterLeft >= 5 || counterRight >= 5) { // when one of the players have a score of 5 or higher spawn random items
                 item.setVisible(true); // makes item visible
 
                 for (Ball ball : matchBall) { // extended for Explanation: For every ball object in Ball[] matchball do:
                     if (ball.getRectangle().intersects(item.getRectangle())) {
-                        item.newSpawn(); // spawns new item
-                        item.reArrange(); // defines hit box to new spawn location
+                        item.resetSpawn(); // spawns new item
                         item.setVisible(false); // hides the new item
                         int randomInteger = random.nextInt(7); // random integer defines what happens if object get hit
 
@@ -137,21 +138,21 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
         if (item.isVisible()) { // makes item visible to the player
             g.setColor(Color.GREEN);
-            g.fillRect(item.getXKoord(), item.getYKoord(), item.getSize(), item.getSize());
+            g.fillRect(item.getxKoord(), item.getyKoord(), item.getSize1(), item.getSize2());
         }
         g.setColor(Color.WHITE);
         for (Ball ball : matchBall) { // draw every ball
-            g.fillOval(ball.getXKoord(), ball.getYKoord(), ball.getSize(), ball.getSize()); // Draws matchBalls
+            g.fillOval(ball.getxKoord(), ball.getyKoord(), ball.getSize1(), ball.getSize2()); // Draws matchBalls
         }
 
         g.setColor(Color.YELLOW); // draw the 2 bricks
-        g.fillRect(brickLeft.getXKoord(), brickLeft.getYKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
-        g.fillRect(brickRight.getXKoord(), brickRight.getYKoord(), brickRight.getSize1(), brickRight.getSize2());
+        g.fillRect(brickLeft.getxKoord(), brickLeft.getyKoord(), brickLeft.getSize1(), brickLeft.getSize2()); // Draws brick
+        g.fillRect(brickRight.getxKoord(), brickRight.getyKoord(), brickRight.getSize1(), brickRight.getSize2());
 
         g.setColor(Color.WHITE); // draw / display counter
         g.setFont(new Font("Arial", Font.PLAIN, 20));
-        g.drawString("" + matchBall[0].getCounterLeft(), 50, 40); // Displays current score
-        g.drawString("" + matchBall[0].getCounterRight(), 740, 40);
+        g.drawString("" + counterLeft, 50, 40); // Displays current score
+        g.drawString("" + counterRight, 740, 40);
     }
 
     @Override
@@ -199,15 +200,26 @@ public class Pong extends JPanel implements Runnable, KeyListener {
         } // end of if
     }
 
+    public void checkScore() {
+        for (Ball ball : matchBall) {
+            if (ball.getxKoord() < 0) {
+                counterRight++;
+            }
+            if (ball.getxKoord() > 780) {
+                counterLeft++;
+            }
+        }
+    }
+
     public void endScreen() {
         System.out.println("The Game has ended!");
-        if (matchBall[0].getCounterLeft() > matchBall[0].getCounterRight()) {
+        if (counterLeft > counterRight) {
             System.out.println("The Left Player has won!");
-            System.out.println("Score \nLeft: " + matchBall[0].getCounterLeft() + " - Right: " + matchBall[0].getCounterRight());
+            System.out.println("Score \nLeft: " + counterLeft + " - Right: " + counterRight);
         }
-        if (matchBall[0].getCounterLeft() < matchBall[0].getCounterRight()) {
+        if (counterLeft < counterRight) {
             System.out.println("The Right Player has won!");
-            System.out.println("Score \nLeft: " + matchBall[0].getCounterLeft() + " - Right: " + matchBall[0].getCounterRight());
+            System.out.println("Score \nLeft: " + counterLeft + " - Right: " + counterRight);
         }
     }
 

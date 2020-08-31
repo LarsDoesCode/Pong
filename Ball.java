@@ -1,40 +1,20 @@
 import java.awt.Rectangle;
-import java.util.Random;
 
-public class Ball {
+public class Ball extends Sprite {
     public int counterRight, counterLeft;
-    private int xKoord;
-    private int yKoord;
     private int dx;
     private int dy;
-    private final int size;
-    private final Rectangle rectangle;
 
     public Ball(int pX, int pY, int pDx, int pDy, int pSize) {
         xKoord = pX;
         yKoord = pY;
         dx = pDx;
         dy = pDy;
-        size = pSize;
+        size1 = pSize;
+        size2 = pSize;
         counterRight = 0;
         counterLeft = 0;
-        rectangle = new Rectangle(xKoord, yKoord, size, size);
-    }
-
-    public int getXKoord() {
-        return xKoord;
-    }
-
-    public int getYKoord() {
-        return yKoord;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public Rectangle getRectangle() {
-        return rectangle;
+        rectangle = new Rectangle(xKoord, yKoord, size1, size2);
     }
 
     public void changeXDirection() {
@@ -48,33 +28,27 @@ public class Ball {
     public void speedUp(int pSpeed) {
         dx -= pSpeed;
     }
+//
+//    public int getCounterLeft() {
+//        return counterLeft;
+//    }
+//
+//    public int getCounterRight() {
+//        return counterRight;
+//    }
 
-    public void resetSpawn() {
-        Random random = new Random();
-        xKoord = random.nextInt(200 + 1) + 350 + 1; // random spawn in specific field
-        yKoord = random.nextInt(150 + 1) + 250 + 1;
-        dx = -dx; // Turns the direction of the ball around to make it fair
-        dy = -dy;
-        rectangle.setLocation(xKoord, yKoord);
-    }
-
-    public int getCounterLeft() {
-        return counterLeft;
-    }
-
-    public int getCounterRight() {
-        return counterRight;
-    }
-
+    @Override
     public void move() {
 
         if (xKoord < 0) { // when ball gets 'out of bounce' reset
-            counterRight++;
+            changeXDirection();
+            changeYDirection();
             resetSpawn();
         }
 
         if (xKoord > 780) {
-            counterLeft++;
+            changeXDirection();
+            changeYDirection();
             resetSpawn();
         }
 
