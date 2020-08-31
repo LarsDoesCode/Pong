@@ -8,27 +8,27 @@ public abstract class Sprite {
     protected int size1, size2;
     protected Rectangle rectangle;
 
-    public int getyKoord() {
+    protected int getyKoord() {
         return yKoord;
     }
 
-    public int getxKoord() {
+    protected int getxKoord() {
         return xKoord;
     }
 
-    public int getSize1() {
+    protected int getSize1() {
         return size1;
     }
 
-    public int getSize2() {
+    protected int getSize2() {
         return size2;
     }
 
-    public Rectangle getRectangle() {
+    protected Rectangle getRectangle() {
         return rectangle;
     }
 
-    public void resetSpawn() {
+    protected void resetSpawn() {
         Random random = new Random();
         xKoord = random.nextInt(200 + 1) + 350 + 1;
         yKoord = random.nextInt(150 + 1) + 250 + 1;

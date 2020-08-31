@@ -1,7 +1,6 @@
 import java.awt.Rectangle;
 
 public class Ball extends Sprite {
-    public int counterRight, counterLeft;
     private int dx;
     private int dy;
 
@@ -12,8 +11,6 @@ public class Ball extends Sprite {
         dy = pDy;
         size1 = pSize;
         size2 = pSize;
-        counterRight = 0;
-        counterLeft = 0;
         rectangle = new Rectangle(xKoord, yKoord, size1, size2);
     }
 
@@ -28,14 +25,6 @@ public class Ball extends Sprite {
     public void speedUp(int pSpeed) {
         dx -= pSpeed;
     }
-//
-//    public int getCounterLeft() {
-//        return counterLeft;
-//    }
-//
-//    public int getCounterRight() {
-//        return counterRight;
-//    }
 
     @Override
     public void move() {

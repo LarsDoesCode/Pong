@@ -73,26 +73,31 @@ public class Pong extends JPanel implements Runnable, KeyListener {
                         item.setVisible(false); // hides the new item
                         int randomInteger = random.nextInt(7); // random integer defines what happens if object get hit
 
-                        if (randomInteger == 0) {
-                            ball.changeXDirection();
-                            System.out.println("The Ball changed directions");
-                        } else if (randomInteger == 1) {
-                            ball.speedUp(2);
-                            System.out.println("The Ball moves faster");
-                        } else if (randomInteger == 2) {
-                            brickLeft.speedUp();
-                            System.out.println("The left Brick now moves faster");
-                        } else if (randomInteger == 3) {
-                            brickLeft.slowDown();
-                            System.out.println("The left Brick now moves slower");
-                        } else if (randomInteger == 4) {
-                            brickRight.speedUp();
-                            System.out.println("The right Brick now moves faster");
-                        } else if (randomInteger == 5) {
-                            brickRight.slowDown();
-                            System.out.println("The right Brick now moves slower");
-                        } else {
-                            System.out.println("Nothing happened");
+                        switch (randomInteger) {
+                            case 0:
+                                ball.changeXDirection();
+                                System.out.println("The Ball changed directions");
+                                break;
+                            case 1:
+                                ball.speedUp(2);
+                                System.out.println("The Ball moves faster");
+                                break;
+                            case 2:
+                                brickLeft.speedUp();
+                                System.out.println("The left Brick now moves faster");
+                                break;
+                            case 3:
+                                brickLeft.slowDown();
+                                System.out.println("The left Brick now moves slower");
+                                break;
+                            case 4:
+                                brickRight.speedUp();
+                                System.out.println("The right Brick now moves faster");
+                                break;
+                            case 5:
+                                brickRight.slowDown();
+                                System.out.println("The right Brick now moves slower");
+                                break;
                         }
                     }
                 }
@@ -213,6 +218,7 @@ public class Pong extends JPanel implements Runnable, KeyListener {
 
     public void endScreen() {
         System.out.println("The Game has ended!");
+
         if (counterLeft > counterRight) {
             System.out.println("The Left Player has won!");
             System.out.println("Score \nLeft: " + counterLeft + " - Right: " + counterRight);
