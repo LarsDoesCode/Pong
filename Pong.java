@@ -71,33 +71,33 @@ public class Pong extends JPanel implements Runnable, KeyListener {
                     if (ball.getRectangle().intersects(item.getRectangle())) {
                         item.resetSpawn(); // spawns new item
                         item.setVisible(false); // hides the new item
-                        int randomInteger = random.nextInt(7); // random integer defines what happens if object get hit
+                        int randomInteger = random.nextInt(6); // random integer defines what happens if object get hit
 
                         switch (randomInteger) {
-                            case 0:
+                            case 0 -> {
                                 ball.changeXDirection();
                                 System.out.println("The Ball changed directions");
-                                break;
-                            case 1:
+                            }
+                            case 1 -> {
                                 ball.speedUp(2);
                                 System.out.println("The Ball moves faster");
-                                break;
-                            case 2:
+                            }
+                            case 2 -> {
                                 brickLeft.speedUp();
                                 System.out.println("The left Brick now moves faster");
-                                break;
-                            case 3:
+                            }
+                            case 3 -> {
                                 brickLeft.slowDown();
                                 System.out.println("The left Brick now moves slower");
-                                break;
-                            case 4:
+                            }
+                            case 4 -> {
                                 brickRight.speedUp();
                                 System.out.println("The right Brick now moves faster");
-                                break;
-                            case 5:
+                            }
+                            case 5 -> {
                                 brickRight.slowDown();
                                 System.out.println("The right Brick now moves slower");
-                                break;
+                            }
                         }
                     }
                 }
